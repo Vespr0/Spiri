@@ -2,6 +2,7 @@ local Debugger = {}
 Debugger.__index = Debugger
 
 local Debris = game:GetService("Debris")
+local RunService = game:GetService("RunService")
 local AssetsDealer = require(game:GetService("ReplicatedStorage").Shared.AssetsDealer)
 
 function Debugger:chat(message : string)
@@ -18,6 +19,8 @@ function Debugger:setup(body)
     self.Ui = asset:FindFirstChildOfClass("Attachment").Gui:Clone()
     self.Ui.Parent = body:WaitForChild("Head")
     self.TextTemplate = self.Ui.Frame.Label:Clone()
+    -- The debugger isn't visible in-game.
+    self.Ui.Enabled = RunService:IsStudio()
     -- Clean up
     asset:Destroy()
     self.Ui.Frame.Label:Destroy()
