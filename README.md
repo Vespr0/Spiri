@@ -1,4 +1,6 @@
-![logo](https://i.ibb.co/PgxJ9km/spiri-long.png)
+
+![spiri long 2](https://github.com/user-attachments/assets/0a9d2958-2aec-4b53-a9a1-5b980f590f1a)
+
 # SPIRI 
 
 An experimental and unconvencional library for making complex NPCS that favors composition and inheritance for Roblox LUAU.
