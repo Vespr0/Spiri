@@ -12,7 +12,7 @@ SPIRI.__index = SPIRI
   | |  |____/  | .__/  |_| |_|    |_|  | |
    \_\         |_|                    /_/
 
-   Spiri - 0.1 - EliteEngineer(CasualEngineer0)
+   Spiri - EliteEngineer(CasualEngineer0)
 
    The art of giving the illusion of intelligence.
 ]]
