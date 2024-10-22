@@ -1,4 +1,5 @@
-![logo](https://github.com/user-attachments/assets/236e2c91-2856-4a24-ba67-a7c82063210c)
+
+![spiri long 2](https://github.com/user-attachments/assets/0a9d2958-2aec-4b53-a9a1-5b980f590f1a)
 
 # SPIRI 
 
