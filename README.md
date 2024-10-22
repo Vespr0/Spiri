@@ -1,4 +1,5 @@
-# SPIRI
+![Alt text](https://ibb.co/RpXbvLz "a title")
+# SPIRI 
 
 An experimental and unconvencional library for making complex NPCS that favors composition and inheritance for Roblox LUAU.
 
@@ -26,7 +27,7 @@ An experimental and unconvencional library for making complex NPCS that favors c
 **Easy to reference events .**
 
 ### Debugger
-**Easy to reference events .**
+**Use the NPC rig to display messages above it's head for debugging.**
 
 # Usage
 
