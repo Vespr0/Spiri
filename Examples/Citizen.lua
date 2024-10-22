@@ -14,10 +14,9 @@ function NPC:scream()
         return false
     end
     start:Connect(function()
-        self.debugger:chat("AAAAAAAAAA")
+        self.debugger:chat("AAAAAAAAAAh!!!")
         self.movement:jump()
         task.wait(1)
-        self.debugger:chat("Im done screaming lol")
         finish:Fire()
     end)
     return true
@@ -28,6 +27,8 @@ function NPC:wander()
     if not start then
         return false
     end
+
+    -- Define a start function to actually execute the action
     start:Connect(function()
         self.flags:set("Wandering",true)
         
@@ -45,6 +46,8 @@ function NPC:wander()
         self.flags:set("Wandering",false)
         finish:Fire()
     end)
+
+    -- Define abortion to make sure the action is interrupted in favor of higher priority ones
     abort:Connect(function()
         self.movement:halt()
     end)
@@ -54,20 +57,21 @@ end
 function NPC:start()
     self.flags:set("Wandering",false)
 
+    -- The tick event is fired every self.reflex
+    -- Every tick check if the NPC is free to walk around randomly (see Movement component)
     self.events.get("tick"):Connect(function()
         if self.actionQueue:isFree("wander") then
             self:wander()            
         end
-        task.wait(self.reflex)
     end)
 
+    -- Every tick check if the NPC is free to scream, which can only be done every 10 seconds (see Coolers component)
     self.events.get("tick"):Connect(function()
         if self.actionQueue:isFree("scream") and self.cooler:isReady("scream") then
             if self:scream() then
                 self.cooler:heat("scream",10)
             end
         end
-        task.wait(self.reflex)
     end)
 end
 

@@ -3,6 +3,8 @@ ActionQueue.__index = ActionQueue
 
 -- Dependancies --
 local Action = require(script.Parent.Action)
+-- How big the difference in priority has to be for an action to be aborted in favor of another one, feel free to customize.
+local ABORTION_THRESHOLD = 1
 
 export type QueueEntryType = {
     action: Action.ActionType,priority: number,expirationTime: number
@@ -75,7 +77,7 @@ function ActionQueue:activate()
                 local highestPriorityAction = self:getHighestPriorityAction()
                 if highestPriorityAction then
                    local difference = highestPriorityAction.priority - bestEntry.priority
-                   if not bestEntry.uninterruptible and difference > 3 then
+                   if not bestEntry.uninterruptible and difference > ABORTION_THRESHOLD then
                         return true
                    end
                 end
