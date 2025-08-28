@@ -1,10 +1,10 @@
-local Creature = require(script.Parent.Parent.Spiri.Subclasses.Creature)
+local Human = require(script.Parent.Parent.Subclasses.Human)
 
-NPC = {}
-NPC.__index = NPC
-setmetatable(NPC, Creature)
+Citizen = {}
+Citizen.__index = Citizen
+setmetatable(Citizen, Human)
 
-function NPC:scream()
+function Citizen:scream()
     local target = self.targeter:findClosest()
     if self.targeter:getDistance(target,self.body) > 20 then
         return false
@@ -14,7 +14,7 @@ function NPC:scream()
         return false
     end
     start:Connect(function()
-        self.debugger:chat("AAAAAAAAAAh!!!")
+        self.debugger:chat("AAAAAh!")
         self.movement:jump()
         task.wait(1)
         finish:Fire()
@@ -22,7 +22,7 @@ function NPC:scream()
     return true
 end
 
-function NPC:wander()
+function Citizen:wander()
     local start,finish,abort,isAborted = self.actionQueue:add("wander",1)
     if not start then
         return false
@@ -54,18 +54,18 @@ function NPC:wander()
     return true
 end
 
-function NPC:start()
+function Citizen:start()
     self.flags:set("Wandering",false)
 
     -- The tick event is fired every self.reflex
-    -- Every tick check if the NPC is free to walk around randomly (see Movement component)
+    -- Every tick check if the Citizen is free to walk around randomly (see Movement component)
     self.events.get("tick"):Connect(function()
         if self.actionQueue:isFree("wander") then
             self:wander()            
         end
     end)
 
-    -- Every tick check if the NPC is free to scream, which can only be done every 10 seconds (see Coolers component)
+    -- Every tick check if the Citizen is free to scream, which can only be done every 10 seconds (see Coolers component)
     self.events.get("tick"):Connect(function()
         if self.actionQueue:isFree("scream") and self.cooler:isReady("scream") then
             if self:scream() then
@@ -75,13 +75,13 @@ function NPC:start()
     end)
 end
 
-function NPC.new(body,config)
-    local self = Creature.new(body,config)
-    setmetatable(self, NPC)
+function Citizen.new(body,config)
+    local self = Human.new(body,config)
+    setmetatable(self, Citizen)
 
     self:start()
 
     return self
 end
 
-return NPC
+return Citizen
