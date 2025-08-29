@@ -1,12 +1,14 @@
 
-![spiri long 2](https://github.com/user-attachments/assets/0a9d2958-2aec-4b53-a9a1-5b980f590f1a)
+# Spiri 
 
-# SPIRI 
+    __  ____            _          _  __
+   / / / ___|   _ __   (_)  _ __  (_) \ \
+  | |  \___ \  | '_ \  | | | '__| | |  | |
+ < <    ___) | | |_) | | | | |    | |   > >
+  | |  |____/  | .__/  |_| |_|    |_|  | |
+   \_\         |_|                    /_/
 
-An experimental and unconvencional library for making complex NPCS that favors composition and inheritance for Roblox LUAU.
-
-**WARNING**: You need to redefine the references to "Signal" with your package. 
-**WARNING**: This library is unfinished, specifically a state machine has to be implemented.
+Made specifically for https://github.com/Vespr0/Gamma.
 
 # Features
 

@@ -45,8 +45,7 @@ end
 function Emotion.new()
     local self = setmetatable({}, Emotion) 
 
-    self.Atmosphere = 0
-    self.Motivation = 0
+    self.Atmosphere = ATMOSPHERES.Neutral
 
     self.Mood = {
         Anger = 0, -- From 0,5

@@ -57,16 +57,14 @@ end
 function Citizen:start()
     self.flags:set("Wandering",false)
 
-    -- The tick event is fired every self.reflex
-    -- Every tick check if the Citizen is free to walk around randomly (see Movement component)
     self.events.get("tick"):Connect(function()
+        -- The tick event is fired every self.reflex
+        -- Every tick check if the Citizen is free to walk around randomly (see Movement component)
         if self.actionQueue:isFree("wander") then
             self:wander()            
         end
-    end)
 
-    -- Every tick check if the Citizen is free to scream, which can only be done every 10 seconds (see Coolers component)
-    self.events.get("tick"):Connect(function()
+        -- Every tick check if the Citizen is free to scream, which can only be done every 10 seconds (see Coolers component)
         if self.actionQueue:isFree("scream") and self.cooler:isReady("scream") then
             if self:scream() then
                 self.cooler:heat("scream",10)

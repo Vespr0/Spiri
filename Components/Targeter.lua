@@ -1,17 +1,24 @@
 local Targeter = {}
 Targeter.__index = Targeter
 
-local Entities = workspace.Entities
+local CollectionService = game:GetService("CollectionService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Game = require(ReplicatedStorage.Utility.Game)
+
+function Targeter:getDistanceRaw(positionA,positionB)
+    return (positionA - positionB).Magnitude
+end
 
 function Targeter:getDistance(entityA,entityB)
-    return (entityA.PrimaryPart.Position - entityB.PrimaryPart.Position).Magnitude
+    return self:getDistanceRaw(entityA.PrimaryPart.Position,entityB.PrimaryPart.Position)
 end
 
 function Targeter:findClosest()
     local bestEntity = nil
+    local entities = CollectionService:GetTagged(Game.Tags.Entity)
 
-    for _,entity in pairs(Entities:GetChildren()) do
-        if entity == self.body then
+    for _,entity in pairs(entities) do
+        if entity == self.serverEntity.rig then
             continue
         end
 
@@ -21,8 +28,8 @@ function Targeter:findClosest()
                     if bestEntity == nil then
                         bestEntity = entity
                     end
-                    local distance = self:getDistance(entity,self.body)
-                    local bestDistance = self:getDistance(bestEntity,self.body)
+                    local distance = self:getDistance(entity,self.serverEntity.rig)
+                    local bestDistance = self:getDistance(bestEntity,self.serverEntity.rig)
                     if distance > self.range then
                         continue
                     end
@@ -34,15 +41,20 @@ function Targeter:findClosest()
         end
     end
 
-    return bestEntity
+    if bestEntity then
+        local direction = CFrame.lookAt(self.serverEntity.root.Position, bestEntity.PrimaryPart.Position).LookVector
+        direction = Vector3.new(direction.X,0,direction.Z)
+
+        return bestEntity, direction
+    end
+
+    return nil
 end
 
-function Targeter.new(body)
+function Targeter.new(serverEntity)
 	local self = setmetatable({}, Targeter)
 	
-	self.body = body
-	self.root = body.PrimaryPart
-	self.humanoid = body:FindFirstChild("Humanoid") :: Humanoid or error("Movement class requires a humanoid")
+	self.serverEntity = serverEntity
 
     self.target = nil
     self.range = 100

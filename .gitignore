@@ -1,0 +1,3 @@
+# Ignore classes and components local to the project
+LocalClasses
+LocalComponents
