@@ -9,16 +9,20 @@ local ChatService = game:GetService("Chat")
 local Debris = game:GetService("Debris")
 local RunService = game:GetService("RunService")
 
-function Debugger:chat(message : string)
-    ChatService:Chat(self.serverEntity.rig.Head, message, "White")
+function Debugger:chat(message: string)
+	ChatService:Chat(self.serverEntity.rig.Head, message, "White")
 end
 
 function Debugger.new(serverEntity)
-    local self = setmetatable({}, Debugger)
+	local self = setmetatable({}, Debugger)
 
-    self.serverEntity = serverEntity
+	self.serverEntity = serverEntity
 
-    return self
+	return self
+end
+
+function Debugger:destroy()
+	-- Nothing to clean up
 end
 
 return Debugger

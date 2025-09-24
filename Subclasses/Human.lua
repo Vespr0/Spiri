@@ -5,13 +5,13 @@ Human = {}
 Human.__index = Human
 setmetatable(Human, Spiri)
 
-function Human.new(serverEntity, config)
-    local self = Spiri.new(serverEntity, config)
-    setmetatable(self, Human)
+function Human.new(serverEntity, treeName, config)
+	local self = Spiri.new(serverEntity, treeName, config)
+	setmetatable(self, Human)
 
-    self.Emotion = Emotion.new()
+	self.Emotion = Emotion.new()
 
-    return self
+	return self
 end
 
 return Human

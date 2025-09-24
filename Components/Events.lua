@@ -18,9 +18,16 @@ end
 function Events.new()
     local self = setmetatable({}, Events)
 
-    self.dict = {}; 
+    self.dict = {};
 
     return self
+end
+
+function Events:destroy()
+    for _, signal in pairs(self.dict) do
+        signal:Destroy()
+    end
+    table.clear(self.dict)
 end
 
 return Events
