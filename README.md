@@ -1,6 +1,6 @@
 # Spiri
 
-Made specifically for https://github.com/Vespr0/Gamma.
+Made specifically for https://github.com/Vespr0/CLOCKWORK.
 
 # Features
 
